@@ -1,47 +1,40 @@
-# diamond-price-predictor-webapp
+> Written manually, without AI assistance.
 
-### diamond_predictor.joblib is not included in the project as it is more than 100 MB
-### Please Use the following Google Drive Link to Download diamond_predictor.joblib file and place it inside flask_app folder
+# diamond-price-predictor-webpage
+
+## What this does
+
+Predicts diamond prices from carat, cut, colour, clarity, and dimensions
+with a trained ML model, served through a Flask API plus a Bootstrap web
+page where users enter values and get a price.
+
+## Business process
+
+A buyer/seller enters a diamond's specs; the page calls
+`/diamonds_api/`; the model returns a price. The model (`joblib`, XGBoost /
+scikit-learn era) was trained in `Diamond_predictor.ipynb` on the Kaggle
+diamonds dataset â€” see the
+[portfolio post](https://rajatsingh.tech/portfolio/2025/07/19/building-a-machine-learning-based-diamond-price-predictor-how-i-created-a-flask-web-app-hosted-on-azure/)
+for the full story. Note: `diamond_predictor.joblib` is over 100 MB so it
+is NOT in the repo â€” download it from
 https://drive.google.com/file/d/1e0yl1v3ehgLBkc7Mw2MpiPVR9CjA7VnX/view?usp=sharing
+and place it inside the `flask-app` folder.
 
-## Languages & Libraries Used :- Python, Flask, Pandas, Matplotlib, numpy, seaborn, JavaScript, BootStrap 5, Jupyter Lab
+## Technical flow
 
+`Jupyter_Notebook/Diamond_predictor.ipynb` (data cleaning + training on
+`diamonds.csv`) â†’ `flask-app/api.py` loads the joblib model and serves
+predictions with Flask-CORS â†’ `index.html` + `diamond.svg` front end.
 
+## Repository structure
 
+- [`flask-app/api.py`](flask-app/api.py) â€” the prediction API
+- [`Jupyter_Notebook/`](Jupyter_Notebook/) â€” training notebook and dataset
+- [`index.html`](index.html), [`diamond.svg`](diamond.svg) â€” the web page
 
+## How to run
 
-
-## Steps to Start Flask Server
-1. Switch to Flask_app directory
-2. Run 'export FLASK_APP=api' in Terminal
-3. Run 'export FLASK_ENV=development' in Terminal
-
-
-
-
-
-
-
-
-
-
-## Flask Dependencies
-Flask==1.1.1
-Flask-Cors==3.0.10
-
-## Data Analysis Dependencies
-
-joblib==1.0.1
-matplotlib==3.4.3
-matplotlib-inline==0.1.2
-notebook==6.4.3
-numpy==1.21.2
-pandas==1.3.2
-scikit-learn==0.24.2
-scipy==1.7.1
-seaborn==0.11.2
-sklearn==0.0
-xgboost==1.4.2
-
-
-
+1. Switch to the `flask-app` directory (with the downloaded joblib in it)
+2. Run `export FLASK_APP=api` and `export FLASK_ENV=development`
+3. `flask run` â€” Flask 1.1.1, Flask-Cors 3.0.10; analysis stack pinned in
+   the original notes (scikit-learn 0.24.2, xgboost 1.4.2, pandas 1.3.2)
